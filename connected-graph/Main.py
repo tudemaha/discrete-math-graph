@@ -30,14 +30,14 @@ print(helper_matrix)
 for row in range(nodes - 1):
     if helper_matrix[row] == 1:
         for column in range(nodes - 1):
-            if (matrix[row][column] == 1) and (helper_matrix[column] == 0):
+            if (matrix[row + 1][column + 1] == 1) and (helper_matrix[column] == 0):
                 helper_matrix[column] = 1
 
 # show last state of matrices
 print('\nMatriks bantuan akhir:')
 print(helper_matrix)
 
-# check the connection status of graph
+# check the connection in helper matrix (True == connected)
 status = True
 for helper in helper_matrix:
     if helper == 0:
@@ -45,7 +45,4 @@ for helper in helper_matrix:
         break
 
 # print the connection status
-if status == True:
-    print("Graph terhubung!")
-else:
-    print("Graph tidak terhubung!")
+print(("Graph tidak terhubung!", "Graph terhubung") [status == True])
