@@ -2,7 +2,7 @@
 import numpy as np
 
 # program title
-print('===== PROGRAM KETERHUBUNGAN GRAPH =====')
+print('===== PROGRAM PENGECEKAN ARAH GRAPH =====')
 
 # variables declaration and initialization
 nodes = int(input('\nBanyak node: '))
