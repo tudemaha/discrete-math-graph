@@ -29,5 +29,29 @@ for row in range(nodes):
             row = nodes + 1
             break
 
-# show the direction status
-print(("\nGraph tidak berarah!", "\nGraph berarah!") [status == True])
+x, deg, in_deg, out_deg = 0, 0, 0, 0
+deg_list = []
+print("\nDerajat graph:")
+if status == False:
+    for row in matrix:
+        for element in row:
+            deg += element
+        x += 1
+        print("Node", x, ":", deg)
+        deg = 0
+
+else:
+    for node in range(nodes):
+        deg_list.append({})
+        deg_list[node]["node"] = node + 1
+        for element in matrix[node, :]:
+            out_deg += element
+            deg_list[node]["out_deg"] = out_deg
+            out_deg = 0
+        for element in matrix[:, node]:
+            in_deg += element
+            deg_list[node]["in_deg"] = in_deg
+            in_deg = 0
+
+for dict in deg_list:
+    print(dict)
