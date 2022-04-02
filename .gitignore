@@ -1,2 +1,8 @@
-# Ignore all .exe files from compiling processes
+# VS Code config
+.vscode/*
+
+# output file
 *.exe
+
+# Linux output
+prufer-encode
