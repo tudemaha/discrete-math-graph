@@ -6,8 +6,8 @@ using namespace std;
 
 int main() {
     // program header
-    cout << "===== PROGRAM PRUFER ENCODING =====" << endl;
-    cout << "===================================" << endl << endl;
+    cout << "===== PRUFER ENCODING =====" << endl;
+    cout << "===========================" << endl << endl;
 
     // ifstream object
     ifstream matrix_file;
@@ -90,12 +90,43 @@ int main() {
     }
 
     // circuit check
-    // int before;
-    // for(int i = 0; i < vertex; i++) {
-    //     for(int j = 0; j < vertex; j++) {
-    //         if()
-    //     }
-    // }
+
+    // deg count
+    int degree[vertex];
+    for(int i = 0; i < vertex; i++) {
+        degree[i] = 0;
+        for(int j = 0; j < vertex; j++) {
+            degree[i] += matrix[i][j];
+        }
+    }
+
+    // prufer enocde
+    int prufer[vertex - 2];
+    int count = 0;
+    
+    while(count < vertex - 2) {
+        for(int i = 0; i < vertex; i++) {
+            if(degree[i] == 1) {
+                (degree[i])--;
+                for(int j = 0; j < vertex; j++) {
+                    if(matrix[i][j] == 1) {
+                        prufer[count] = j + 1;
+                        matrix[i][j]--;
+                        matrix[j][i]--;
+                        (degree[j])--;
+                        break;
+                    }
+                }
+                break;
+            }
+        }
+        count++;
+    }
+
+    cout << endl << "Kode prufer: ";
+    for(int i = 0; i < vertex - 2; i++) {
+        cout << prufer[i] << " ";
+    }
 
     return 0;
 
