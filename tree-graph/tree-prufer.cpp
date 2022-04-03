@@ -100,10 +100,11 @@ int main() {
     }
 
     // prufer enocde
-    int prufer[vertex - 2];
+    int prufer_count = vertex - 2;
+    int prufer[prufer_count];
     int count = 0;
     
-    while(count < vertex - 2) {
+    while(count < prufer_count) {
         for(int i = 0; i < vertex; i++) {
             if(degree[i] == 1) {
                 (degree[i])--;
@@ -124,14 +125,13 @@ int main() {
 
     // cout prufer code
     cout << endl << "Kode prufer: ";
-    for(int i = 0; i < vertex - 2; i++) {
+    for(int i = 0; i < prufer_count; i++) {
         cout << prufer[i] << " ";
     }
 
     // make vertex
-    int prufer_count = vertex - 2;
-    int vertex_list[prufer_count + 2];
-    for(int i = 0; i < count + 2; i++) {
+    int vertex_list[vertex];
+    for(int i = 0; i < vertex; i++) {
         vertex_list[i] = i + 1;
     }
 
@@ -139,7 +139,7 @@ int main() {
     bool status = true;
     int edge[prufer_count + 1][2];
     for(int i = 0; i < prufer_count; i++) {
-        for(int j = 0; j < prufer_count + 2; j++) {
+        for(int j = 0; j < vertex; j++) {
             if(prufer[i] != vertex_list[j]) {
                 for(int k = 0; k < prufer_count; k++) {
                     if(vertex_list[j] == prufer[k]) {
@@ -161,7 +161,7 @@ int main() {
 
     // add last edge into edge array
     int insert = 0;
-    for(int i = 0; i < prufer_count + 2; i++) {
+    for(int i = 0; i < vertex; i++) {
         if(insert > 1) break;
         if(vertex_list[i] != 0) {
             edge[prufer_count][insert] = vertex_list[i];
