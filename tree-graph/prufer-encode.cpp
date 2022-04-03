@@ -11,9 +11,9 @@ int main() {
 
     // ifstream object
     ifstream matrix_file;
+    matrix_file.open("adjacency-matrix.txt");
 
     // count vertex
-    matrix_file.open("adjacency-matrix.txt");
     int vertex = 0, buffer;
     while(!matrix_file.eof()) {
         matrix_file >> buffer;
@@ -123,10 +123,21 @@ int main() {
         count++;
     }
 
+    // cout prufer code and write to file
+    ofstream prufer_file;
+    prufer_file.open("prufer-file.txt");
+    
     cout << endl << "Kode prufer: ";
     for(int i = 0; i < vertex - 2; i++) {
-        cout << prufer[i] << " ";
+        cout << prufer[i];
+        prufer_file << prufer[i];
+        if(i != vertex - 3) {
+            cout << " ";
+            prufer_file << " ";
+        }
+
     }
+    prufer_file.close();    
 
     return 0;
 
