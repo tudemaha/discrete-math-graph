@@ -125,7 +125,7 @@ int main() {
 
     // cout prufer code and write to file
     ofstream prufer_file;
-    prufer_file.open("prufer-file.txt");
+    prufer_file.open("prufer-code.txt");
     
     cout << endl << "Kode prufer: ";
     for(int i = 0; i < vertex - 2; i++) {
