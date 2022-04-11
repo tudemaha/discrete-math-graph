@@ -88,8 +88,6 @@ int main() {
         exit(0);
     }
 
-    // circuit check
-
     // deg count
     int degree[vertex];
     for(int i = 0; i < vertex; i++) {
