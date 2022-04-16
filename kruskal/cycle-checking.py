@@ -13,30 +13,35 @@ flag = [-1, -1, -1, -1, -1]
 queue = []
 visited = []
 vertices = len(matrix)
-status = 0
+status = False
 
-edge = 0
-while edge < vertices - 1:
-    for i in range(vertices):
-        if flag[i] == -1:
-            queue.append(i)
-            flag[i] += 1
+# edge = 0
+# while edge < vertices:
+for i in range(vertices):
+    if status:
+        continue
 
-        if (i in queue) and (flag[i] == 0):
-            visited.append(queue.pop(queue.index(i)))
-            flag[i] += 1
-            status = 1            
+    if flag[i] == -1:
+        queue.append(i)
+        flag[i] += 1
 
+    if (i in queue) and (flag[i] == 0):
+        visited.append(queue.pop(queue.index(i)))
+        flag[i] += 1
+                    
         for j in range(vertices):
             if (matrix[i][j] == 1) and (flag[j] == -1):
                 queue.append(j)
                 flag[j] += 1
                 matrix[i][j] = matrix[j][i] = 0
 
-        if status == 1:
-            status = 0
-            edge += 1
-            break
+            if (matrix[i][j] == 1) and (flag[j] == 0):
+                status = True
+    # edge += 1
+
+    # if status:
+    #     continue
+            
 
 print(flag)
 print(queue)
