@@ -15,8 +15,6 @@ visited = []
 vertices = len(matrix)
 status = False
 
-# edge = 0
-# while edge < vertices:
 for i in range(vertices):
     if status:
         continue
@@ -37,11 +35,6 @@ for i in range(vertices):
 
             if (matrix[i][j] == 1) and (flag[j] == 0):
                 status = True
-    # edge += 1
-
-    # if status:
-    #     continue
-            
 
 print(flag)
 print(queue)
