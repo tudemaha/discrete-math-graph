@@ -2,14 +2,16 @@ from itertools import cycle
 import numpy as np
 
 matrix = [
-    [0, 1, 1, 1],
-    [1, 0, 0, 1],
-    [1, 0, 0, 1],
-    [1, 1, 1, 0]
+    [0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 1, 1],
+    [1, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0]
 ]
 matrix = np.array(matrix)
 
-flag = [-1, -1, -1, -1]
+flag = [-1, -1, -1, -1, -1, -1]
 queue = []
 visited = []
 vertices = len(matrix)
@@ -37,7 +39,17 @@ for i in range(vertices):
             if (matrix[i][j] == 1) and (flag[j] == 0):
                 cycle_maker.append(j)
 
-print(flag)
-print(queue)
-print(visited)
-print(matrix)
+print("Status tiap vertex:")
+print(flag, end="\n\n")
+
+print("Keadaan queue:")
+print(queue, end="\n\n")
+
+print("Graph tanpa cycle:")
+print(visited, end="\n\n")
+
+print("Matriks ketetangaan akhir:")
+print(matrix, end="\n\n")
+
+if 0 in flag:
+    print("Status: Graph mengandung cycle!")
