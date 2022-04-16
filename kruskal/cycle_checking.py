@@ -15,28 +15,26 @@ queue = []
 visited = []
 vertices = len(matrix)
 cycle_maker = []
+pop_state = 0
 
 for i in range(vertices):
-    if i in cycle_maker:
-        continue
-
     if flag[i] == -1:
         queue.append(i)
         flag[i] += 1
-
-    if (i in queue) and (flag[i] == 0):
-        visited.append(queue.pop(queue.index(i)))
+    
+    if (flag[i] == 0) and (i not in cycle_maker):
+        visited.append(queue.pop(pop_state))
         flag[i] += 1
-                    
+
         for j in range(vertices):
             if (matrix[i][j] == 1) and (flag[j] == -1):
-                status = 1
                 queue.append(j)
                 flag[j] += 1
-                matrix[i][j] = matrix[j][i] = 0
-
-            if (matrix[i][j] == 1) and (flag[j] == 0):
+            elif(matrix[i][j] == 1) and (flag[j] == 0):
                 cycle_maker.append(j)
+                
+    elif (flag[i] == 0) and (i in cycle_maker):
+        pop_state += 1
 
 print("Status tiap vertex:")
 print(flag, end="\n\n")
