@@ -1,4 +1,3 @@
-from itertools import cycle
 import numpy as np
 
 matrix = [
@@ -53,3 +52,5 @@ print(matrix, end="\n\n")
 
 if 0 in flag:
     print("Status: Graph mengandung cycle!")
+else:
+    print("Status: Graph tidak mengandung cycle!")
