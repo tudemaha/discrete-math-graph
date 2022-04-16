@@ -3,19 +3,21 @@ import numpy as np
 from pymacaroons import Verifier
 
 matrix = [
-    [0, 1, 1, 0, 0],
-    [1, 0, 0, 1, 1],
-    [1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0]
+    [0, 1, 1, 0, 0, 0],
+    [1, 0, 0, 1, 1, 1],
+    [1, 0, 0, 1, 0, 0],
+    [0, 1, 1, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0],
+    [0, 1, 0, 0, 0, 0]
 ]
 matrix = np.array(matrix)
 
-flag = [-1, -1, -1, -1, -1]
+flag = [-1, -1, -1, -1, -1, -1]
 queue = []
 visited = []
 vertices = len(matrix)
 cycle_maker = []
+pop_state = 0
 
 for i in range(vertices):
     if flag[i] == -1:
@@ -23,7 +25,7 @@ for i in range(vertices):
         flag[i] += 1
     
     if (flag[i] == 0) and (i not in cycle_maker):
-        visited.append(queue.pop(0))
+        visited.append(queue.pop(pop_state))
         flag[i] += 1
 
         for j in range(vertices):
@@ -32,7 +34,9 @@ for i in range(vertices):
                 flag[j] += 1
             elif(matrix[i][j] == 1) and (flag[j] == 0):
                 cycle_maker.append(j)
-
+                
+    elif (flag[i] == 0) and (i in cycle_maker):
+        pop_state += 1
 
 print("Status tiap vertex:")
 print(flag, end="\n\n")
