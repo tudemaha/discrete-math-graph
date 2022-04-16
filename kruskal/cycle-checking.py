@@ -29,6 +29,7 @@ for i in range(vertices):
                     
         for j in range(vertices):
             if (matrix[i][j] == 1) and (flag[j] == -1):
+                status = 1
                 queue.append(j)
                 flag[j] += 1
                 matrix[i][j] = matrix[j][i] = 0
