@@ -1,15 +1,14 @@
 import numpy as np
 
 matrix = [
-    [0, 1, 1, 0, 0],
-    [1, 0, 0, 1, 1],
-    [1, 0, 0, 0, 0],
-    [0, 1, 0, 0, 0],
-    [0, 1, 0, 0, 0]
+    [0, 1, 1, 0],
+    [1, 0, 0, 1],
+    [1, 0, 0, 1],
+    [0, 1, 1, 0]
 ]
 matrix = np.array(matrix)
 
-flag = [-1, -1, -1, -1, -1]
+flag = [-1, -1, -1, -1]
 queue = []
 visited = []
 vertices = len(matrix)
