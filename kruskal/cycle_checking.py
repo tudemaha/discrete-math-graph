@@ -1,6 +1,4 @@
-from itertools import cycle
 import numpy as np
-from pymacaroons import Verifier
 
 matrix = [
     [0, 1, 1, 0, 0, 0],
