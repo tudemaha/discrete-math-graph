@@ -1,10 +1,11 @@
+from itertools import cycle
 import numpy as np
 
 matrix = [
-    [0, 1, 1, 0],
+    [0, 1, 1, 1],
     [1, 0, 0, 1],
     [1, 0, 0, 1],
-    [0, 1, 1, 0]
+    [1, 1, 1, 0]
 ]
 matrix = np.array(matrix)
 
@@ -12,10 +13,10 @@ flag = [-1, -1, -1, -1]
 queue = []
 visited = []
 vertices = len(matrix)
-status = False
+cycle_maker = []
 
 for i in range(vertices):
-    if status:
+    if i in cycle_maker:
         continue
 
     if flag[i] == -1:
@@ -33,7 +34,7 @@ for i in range(vertices):
                 matrix[i][j] = matrix[j][i] = 0
 
             if (matrix[i][j] == 1) and (flag[j] == 0):
-                status = True
+                cycle_maker.append(j)
 
 print(flag)
 print(queue)
