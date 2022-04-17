@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 # cycle detection, parameter: vertices and latest testing matrix
 def cycle_check(vertices, matrix_test):
@@ -43,7 +44,20 @@ def cycle_check(vertices, matrix_test):
         return True
     else:
         return False
-        
+
+# check for connected graph
+def connected(matrix):
+    helper_matrix = np.copy(matrix[0, :])
+    for row in range(len(matrix)):
+        if helper_matrix[row] == 1:
+            for column in range(len(matrix)):
+                if(matrix[row][column] == 1) and (helper_matrix[column] == 0):
+                    helper_matrix[column] = 1
+                    
+    if 0 in helper_matrix:
+        return False
+    else:
+        return True
 
 matrix = []         # adjacency matrix from user insert
 sorted_edge = []    # store ascending sorted edge weight of graph
@@ -60,6 +74,12 @@ matrix_file.close()
 for i, row in enumerate(matrix):
     matrix[i] = list(map(int, matrix[i]))
 matrix = np.array(matrix)
+
+# check for connected graph
+connect = connected(matrix)
+if not connect:
+    print("Graph tidak terhubung, proses tidak dapat dilanjutkan!")
+    sys.exit()
 
 # count vertices
 vertices = len(matrix)
@@ -86,8 +106,12 @@ for i in range(len(sorted_edge)):
             min_idx = j
     sorted_edge[i], sorted_edge[min_idx] = sorted_edge[min_idx], sorted_edge[i]
 
+# print edge-weight matrix
+print("Graph awal:")
+print(matrix)
+
 # make adjacency matrix from sorted edge and check for the cycle
-print("Edge terhubung:")
+print("\nEdge terhubung:")
 for i in range(len(sorted_edge)):
     # mst[m][n] = mst[n][m] because it's undirected graph, if there was an edge in sorted_edge list, make the vertices 1
     mst[sorted_edge[i][0]][sorted_edge[i][1]] = mst[sorted_edge[i][1]][sorted_edge[i][0]] = 1
