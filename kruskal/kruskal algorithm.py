@@ -48,6 +48,7 @@ def cycle_check(vertices, matrix_test):
 matrix = []         # adjacency matrix from user insert
 sorted_edge = []    # store ascending sorted edge weight of graph
 mst = []            # store the minimum spanning tree graph
+graph_weight = 0    # store mst edge weight
 
 # open matrix file and insert into matrix list
 matrix_file = open("edge_weight.txt")
@@ -86,6 +87,7 @@ for i in range(len(sorted_edge)):
     sorted_edge[i], sorted_edge[min_idx] = sorted_edge[min_idx], sorted_edge[i]
 
 # make adjacency matrix from sorted edge and check for the cycle
+print("Edge terhubung:")
 for i in range(len(sorted_edge)):
     # mst[m][n] = mst[n][m] because it's undirected graph, if there was an edge in sorted_edge list, make the vertices 1
     mst[sorted_edge[i][0]][sorted_edge[i][1]] = mst[sorted_edge[i][1]][sorted_edge[i][0]] = 1
@@ -95,10 +97,18 @@ for i in range(len(sorted_edge)):
     # if the return status is true (there is a cycle), make the vertices 0 again (skip inserting the current edge)
     if status:
         mst[sorted_edge[i][0]][sorted_edge[i][1]] = mst[sorted_edge[i][1]][sorted_edge[i][0]] = 0
+        continue
+    
+    graph_weight += sorted_edge[i][2]
+    print(sorted_edge[i][0], "-", sorted_edge[i][1])
 
 # print for debugging
 # print(matrix, end="\n\n")
 # print(sorted_edge, end="\n\n")
 
 # print the mst adjacency matrix and it's the minimum spanning tree
+print("\nMinimum Spanning Tree:")
 print(mst)
+
+# print mst weight
+print("\nBobot graph: ", graph_weight)
