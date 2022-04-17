@@ -53,7 +53,7 @@ def connected(matrix):
             for column in range(len(matrix)):
                 if(matrix[row][column] == 1) and (helper_matrix[column] == 0):
                     helper_matrix[column] = 1
-                    
+
     if 0 in helper_matrix:
         return False
     else:
@@ -78,8 +78,7 @@ matrix = np.array(matrix)
 # check for connected graph
 connect = connected(matrix)
 if not connect:
-    print("Graph tidak terhubung, proses tidak dapat dilanjutkan!")
-    sys.exit()
+    sys.exit("Graph tidak terhubung, proses tidak dapat dilanjutkan!")
 
 # count vertices
 vertices = len(matrix)
