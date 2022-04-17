@@ -29,6 +29,7 @@ for i in range(vertices):
         for j in range(vertices):
             if (matrix[i][j] == 1) and (flag[j] == -1):
                 queue.append(j)
+                matrix[i][j] = matrix[j][i] = 0
                 flag[j] += 1
             elif(matrix[i][j] == 1) and (flag[j] == 0):
                 cycle_maker.append(j)
