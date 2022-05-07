@@ -41,6 +41,28 @@ def cycle_detection(vertices, mst_test):
     else:
         return False
 
+# function to check connected graph
+def connected_graph(matrix):
+    # copy first adjacency matrix row to helper_matrix
+    helper_matrix = np.copy(matrix[0, :])
+
+    # do loop for each row
+    for row in range(len(matrix)):
+        # if current helper matrix not 0
+        if helper_matrix[row] != 0:
+            # do loop for each columnn
+            for column in range(len(matrix)):
+                # if current row and column greater than 0 and helper_matrix[column] still 0
+                if(matrix[row][column] > 0) and (helper_matrix[column] == 0):
+                    # change helper_matrix[column] to 1
+                    helper_matrix[column] = 1
+
+    # if 0 in helper matrix (graph not connected) return false, else return true
+    if 0 in helper_matrix:
+        return False
+    else:
+        return True
+
 
 matrix = []
 mst = []
@@ -55,8 +77,10 @@ vertices = len(matrix)
 
 for i in range(vertices):
     matrix[i] = list(map(int, matrix[i]))
-
 matrix = np.array(matrix)
+
+if not connected_graph(matrix):
+    sys.exit("Graph tidak terhubung, proses tidak dapat dilanjutkan!")
 
 for i in range(vertices):
     for j in range(i, vertices):
