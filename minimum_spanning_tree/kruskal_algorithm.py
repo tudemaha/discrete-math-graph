@@ -134,10 +134,10 @@ for i in range(len(sorted_edge)):
     mst_weight += sorted_edge[i]["weight"]
     print(f"{sorted_edge[i]['from']}-{sorted_edge[i]['to']} -> {sorted_edge[i]['weight']}")
 
-mst = np.array(mst)
 
 # print MST information
 print("\nKruskal MST:")
+mst = np.array(mst)
 print(mst, end="\n\n")
 
 print(f"Bobot MST: {mst_weight}")
