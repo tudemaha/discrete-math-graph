@@ -1,4 +1,5 @@
 # import numpy to make an array
+from itertools import cycle
 import numpy as np
 
 # variables to store:
@@ -22,6 +23,10 @@ for i in range(vertices):
 # make a numpy matrix
 matrix = np.array(matrix)
 
+# print adjacency matrix
+print("Matriks ketetanggaan:")
+print(matrix)
+
 # vertices status for each vertices
 flag = []
 for i in range(vertices):
@@ -41,4 +46,9 @@ for i in range(vertices):
             elif(matrix[i][j] == 1) and (flag[j] == 1):
                 cycle_maker.append(j)
 
-print(cycle_maker)
+# print cycle detection status
+print("\nStatus:")
+if cycle_maker != []:
+    print("Graph memiliki cycle.")
+else:
+    print("Graph tidak memiliki cycle.")
