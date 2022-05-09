@@ -1,7 +1,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <array>
 #include <math.h>
+#include "graph.h"
 
 using namespace std;
 
@@ -50,6 +52,20 @@ int main() {
         sorted_edges[min_idx] = temp;
     }
 
+    for(int i = 0; i < vertices; i++) {
+        for(int j = 0; j < vertices; j++) {
+            mst[i][j] = 0;
+        }
+    }
+
+    for(int i = 0; i < vertices; i++) {
+        mst[sorted_edges[i][0]][sorted_edges[i][1]]
+            = mst[sorted_edges[i][1]][sorted_edges[i][0]]
+            = sorted_edges[i][2];
+
+        
+    }
+
     for(int i = 0; i < sorted_edges.size(); i++) {
         for(int j = 0; j < 3; j++) {
             cout << sorted_edges[i][j] << " ";
@@ -57,7 +73,9 @@ int main() {
         cout << endl;
     }
 
-
+    // cycle_detection(vertices, matrix);
+    array<array<int, 2>> = {{1, 2}, {3, 4}};
+    coout
 
     return 0;
 }
