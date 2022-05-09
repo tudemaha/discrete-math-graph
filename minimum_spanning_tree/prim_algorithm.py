@@ -1,3 +1,4 @@
+# import libraries
 import numpy as np
 import sys
 
@@ -64,77 +65,97 @@ def connected_graph(matrix):
         return True
 
 
-matrix = []
-mst = []
-edges = []
-mst_weight = 0
+# preparing empty list for
+matrix = []     # store adjacency matrix
+mst = []        # mst adjacency matrix
+edges = []      # list of weighted edges
+mst_weight = 0  # store mst weight
 
+# open matrix adjacency file and store in matrix list
 matrix_file = open("graph.txt")
 for row in matrix_file:
     matrix.append(row.split())
 
+# count for vertices
 vertices = len(matrix)
 
+# convert string to int in matrix list
 for i in range(vertices):
     matrix[i] = list(map(int, matrix[i]))
 matrix = np.array(matrix)
 
+# check for connected graph, exit if graph not connected
 if not connected_graph(matrix):
     sys.exit("Graph tidak terhubung, proses tidak dapat dilanjutkan!")
 
+# count for edges weight and its vertices and store in edges list
 for i in range(vertices):
     for j in range(i, vertices):
         if matrix[i][j] != 0:
             edges.append({"from": i, "to": j, "weight": matrix[i][j]})
 
+# make an empty mst adjacency matrix based on n x n elements
 for i in range(vertices):
     mst.append([])
     for j in range(vertices):
         mst[i].append(0)
 
+# print adjacency matrix
 print("Matriks ketetanggan awal:")
 print(matrix, end="\n\n")
 
-# two first used vertices
+# search first edge with minimum weight
 print("Prim's MST Edges:")
+# consider the first set in edge list is the minimum edge
 minimal = edges[0]
+# search for the minimum one, if there was replace the minimal before
 for i in range(len(edges)):
     if minimal["weight"] > edges[i]["weight"]:
         minimal = edges[i]
+# insert the vertices of minimum edge into mst
 mst[minimal["from"]][minimal["to"]] = mst[minimal["to"]][minimal["from"]] = minimal["weight"]
 print(f"{minimal['from']}-{minimal['to']} -> {minimal['weight']}")
+# sum for the weight
 mst_weight += minimal['weight']
+# remove the minimal (selected) edge
 edges.remove(minimal)
 
 # next vertices
-sebelumnya = []
+# prepare selected edge before
+edge_before = []
 while edges != []:
+    # store the minimum before into edge before
     for vertex in ["from", "to"]:
-        sebelumnya.append(minimal[vertex])
+        edge_before.append(minimal[vertex])
 
+    # consider the first set in edge list is the minimum edge
     minimal = edges[0]
+    # search for the actual minimum edges
     for i in range(len(edges)):
         if minimal["weight"] > edges[i]["weight"]:
             minimal = edges[i]
-        
-    if (minimal["from"] in sebelumnya) or (minimal["to"] in sebelumnya):
+    
+    # if the current minimal edge weight is in edge before
+    if (minimal["from"] in edge_before) or (minimal["to"] in edge_before):
+        # add the vertices from the minimal edge into mst
         mst[minimal["from"]][minimal["to"]] = mst[minimal["to"]][minimal["from"]] = minimal["weight"]
 
+        # check for the cycle
         status = cycle_detection(vertices, mst)
+        # if the selected minimum edge makes cycle
         if status:
+            # make the current vertices 0 again, else print the vertices and sum weight
             mst[minimal["from"]][minimal["to"]] = mst[minimal["to"]][minimal["from"]] = 0
         else:
             print(f"{minimal['from']}-{minimal['to']} -> {minimal['weight']}")
             mst_weight += minimal['weight']
         
+        # remove selected edge
         edges.remove(minimal)
 
+# print the edge information
 print("\nPrim's MST:")
 mst = np.array(mst)
 print(mst, end="\n\n")
 
 print("Bobot graph:", mst_weight)
-
-
-    
-    
