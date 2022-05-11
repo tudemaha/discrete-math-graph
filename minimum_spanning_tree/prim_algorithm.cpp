@@ -36,6 +36,11 @@ int main() {
     }
     matrix_file.close();
 
+    if(!connected_graph(vertices, matrix)) {
+        cout << "Graph tidak terhubung, proses tidak dapat dilanjutkan." << endl;
+        exit(0);
+    }
+
     cout << "Matriks ketetanggaan awal:" << endl;
     for(int i = 0; i < vertices; i++) {
         for(int j = 0; j < vertices; j++) {
