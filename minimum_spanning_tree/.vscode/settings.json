@@ -1,5 +1,8 @@
 {
     // "window.zoomLevel": 0.5,
     "editor.fontSize": 16,
-    "editor.lineHeight": 1.4
+    "editor.lineHeight": 1.4,
+    "files.associations": {
+        "iostream": "cpp"
+    }
 }
