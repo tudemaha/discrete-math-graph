@@ -60,3 +60,10 @@ bool connected_graph(int vertices, int **matrix) {
     
     return true;
 }
+
+bool neighbor_checking(std::vector<int> &set_of_vertices, int vertex) {
+    for(int i = 0; i < set_of_vertices.size(); i++) {
+        if(vertex == set_of_vertices[i]) return true;
+    }
+    return false;
+}
