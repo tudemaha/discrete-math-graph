@@ -61,6 +61,11 @@ int main() {
     for(int i = 0; i < vertices; i++) {
         mst[i] = (int*)malloc(vertices * sizeof(int));
     }
+    for(int i = 0; i < vertices; i++) {
+        for(int j = 0; j < vertices; j++) {
+            mst[i][j] = 0;
+        }
+    }
 
     cout << endl << "Prim's MST Edges:" << endl;
     int min_index = 0;
@@ -81,10 +86,10 @@ int main() {
     used_vertices.push_back(edges[min_index][1]);
     edges.erase(edges.begin() + min_index);
 
-    int weight_before;
+    int weight_before = 0;
     bool used;
     while(!edges.empty()) {
-        used ? weight_before = 0: weight_before = edges[min_index][2];
+        used ? weight_before = 0 : weight_before = edges[min_index][2];
         min_index = 0;
         for(int i = 0; i < edges.size(); i++) {
             if((edges[min_index][2] > edges[i][2]) and (edges[i][2] > weight_before)) {
@@ -113,8 +118,7 @@ int main() {
 
                 edges.erase(edges.begin() + min_index);
                 used = true;
-        }        
-        used = false;
+        } else used = false;
     }
 
     cout << endl << "Prim's MST:" << endl;
