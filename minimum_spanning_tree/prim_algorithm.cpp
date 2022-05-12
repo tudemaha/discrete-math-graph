@@ -81,11 +81,12 @@ int main() {
     used_vertices.push_back(edges[min_index][1]);
     edges.erase(edges.begin() + min_index);
 
-    
+    int weight_before;
     while(!edges.empty()) {
+        weight_before = edges[min_index][2];
         min_index = 0;
         for(int i = 0; i < edges.size(); i++) {
-            if(edges[min_index][2] > edges[i][2]) {
+            if((edges[min_index][2] > edges[i][2]) and (edges[i][2] > weight_before)) {
                 min_index = i;
             }
         }
@@ -95,22 +96,22 @@ int main() {
                 mst[edges[min_index][0]][edges[min_index][1]]
                     = mst[edges[min_index][1]][edges[min_index][0]]
                     = edges[min_index][2];
-        }
 
-        if(cycle_detection(vertices, mst)) {
-            mst[edges[min_index][0]][edges[min_index][1]]
-                    = mst[edges[min_index][1]][edges[min_index][0]]
-                    = 0;
-        } else {
-            mst_weight += edges[min_index][2];
-            cout << edges[min_index][0] << "-" << edges[min_index][1];
-            cout << " -> " << edges[min_index][2] << endl;
+                if(cycle_detection(vertices, mst)) {
+                    mst[edges[min_index][0]][edges[min_index][1]]
+                            = mst[edges[min_index][1]][edges[min_index][0]]
+                            = 0;
+                } else {
+                    mst_weight += edges[min_index][2];
+                    cout << edges[min_index][0] << "-" << edges[min_index][1];
+                    cout << " -> " << edges[min_index][2] << endl;
 
-            used_vertices.push_back(edges[min_index][0]);
-            used_vertices.push_back(edges[min_index][1]);
-        }
+                    used_vertices.push_back(edges[min_index][0]);
+                    used_vertices.push_back(edges[min_index][1]);
+                }
 
-        edges.erase(edges.begin() + min_index);
+                edges.erase(edges.begin() + min_index);
+        }        
     }
 
     cout << endl << "Prim's MST:" << endl;
