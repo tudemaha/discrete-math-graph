@@ -1,5 +1,4 @@
 {
-    "files.associations": {
-        "iostream": "cpp"
-    }
+    "editor.fontSize": 15,
+    "editor.lineHeight": 1.5
 }

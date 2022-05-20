@@ -38,6 +38,7 @@ int main() {
     cin >> source;
 
     int current = source;
+    int temp, index;
     edges_weight[current] = 0;
     for(int i = 0; i < vertices; i++) {
         status[current] = 1;
@@ -49,12 +50,20 @@ int main() {
             }
         }
 
-
+        temp = 999;
+        for(int j = 0; j < vertices; j++) {
+            if(status[j] == 0 and temp > edges_weight[j]) {
+                temp = edges_weight[j];
+                index = j;
+            }
+        }
+        current = index;
+        cout << current;
     }
 
-    
+    cout << endl;
     for(int i = 0; i < vertices; i++) {
-        cout << status[i] << " ";
+        cout << edges_weight[i] << " ";
     }
 
 
