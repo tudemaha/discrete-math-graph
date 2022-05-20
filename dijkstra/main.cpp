@@ -27,6 +27,15 @@ int main() {
     }
     matrix_file.close();
 
+    cout << "Matriks bobot:" << endl;
+    for(int i = 0; i < vertices; i++) {
+        for(int j = 0; j < vertices; j++) {
+            cout << matrix[i][j] << " ";
+        }
+        cout << endl;
+    }
+    cout << endl;
+
     int edges_weight[vertices];
     int status[vertices];
     for(int i = 0; i < vertices; i++) {
@@ -44,10 +53,15 @@ int main() {
         status[current] = 1;
         for(int j = 0; j < vertices; j++) {
             if(matrix[current][j] != 0 and status[j] == 0) {
-                if(matrix[current][j] < edges_weight[j]) {
+                if(edges_weight[current] + matrix[current][j] < edges_weight[j]) {
                     edges_weight[j] = edges_weight[current] + matrix[current][j];
                 }
             }
+        }
+
+        cout << endl << endl;
+        for(int i = 0; i < vertices; i++) {
+            cout << edges_weight[i] << " ";
         }
 
         temp = 999;
@@ -58,10 +72,10 @@ int main() {
             }
         }
         current = index;
-        cout << current;
+        cout << "  " << current;
     }
 
-    cout << endl;
+    cout << endl << endl;
     for(int i = 0; i < vertices; i++) {
         cout << edges_weight[i] << " ";
     }
