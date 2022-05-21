@@ -1,12 +1,17 @@
 #include <iostream>
 #include <fstream>
+#include <vector>
 #include <math.h>
 
 using namespace std;
 
 int main() {
+    cout << "===== DIJKSTRA'S SHORTEST PATH =====" << endl;
+    cout << "====================================" << endl << endl;
+
     ifstream matrix_file;
     int vertices = 0, source, current, index, temp;
+        vector<vector<int>> path;
 
     matrix_file.open("graph.txt");
     short buffer;
@@ -49,6 +54,7 @@ int main() {
     for(int i = 0; i < vertices; i++) {
         status[i] = false;
         path_weight[i] = 999;
+        path.push_back({});
     }
 
     // for(int i = 0; i < vertices; i++) {
@@ -57,12 +63,15 @@ int main() {
 
     current = source;
     path_weight[current] = 0;
+    path[current].push_back(source);
     for(int i = 0; i < vertices; i++) {
         status[current] = 1;
         for(int j = 0; j < vertices; j++) {
             if(matrix[current][j] != 0 and status[j] == 0) {
                 if(path_weight[current] + matrix[current][j] < path_weight[j]) {
                     path_weight[j] = path_weight[current] + matrix[current][j];
+                    path[j] = path[current];
+                    path[j].push_back(j);
                 }
             }
         }
@@ -80,8 +89,21 @@ int main() {
 
     cout << endl << "Daftar jarak:" << endl;
     for(int i = 0; i < vertices; i++) {
-        cout << source + 1 << " - " << i + 1 << " ==> " << path_weight[i] << endl;;
+        cout << source + 1 << " - " << i + 1 << " ==> " << path_weight[i];
+        cout << " (" << source + 1;
+        for(int j = 1; j < path[i].size(); j++) {
+            cout << " -> " << path[i][j] + 1;
+        }
+        cout << ")" << endl;
     }
+
+    // cout << endl;
+    // for(int i = 0; i < vertices; i++) {
+    //     for(int j = 0; j < path[i].size(); j++) {
+    //         cout << path[i][j] << " ";
+    //     }
+    //     cout << endl;
+    // }
 
     return 0;
 }
