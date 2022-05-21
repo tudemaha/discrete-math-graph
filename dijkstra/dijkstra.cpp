@@ -8,10 +8,9 @@ using namespace std;
 int main() {
     cout << "===== DIJKSTRA'S SHORTEST PATH =====" << endl;
     cout << "====================================" << endl << endl;
-
     ifstream matrix_file;
     int vertices = 0, source, current, index, temp;
-        vector<vector<int>> path;
+    vector<vector<int>> path;
 
     matrix_file.open("graph.txt");
     short buffer;
@@ -57,10 +56,6 @@ int main() {
         path.push_back({});
     }
 
-    // for(int i = 0; i < vertices; i++) {
-    //     cout << status[i] << " " << path_weight[i] << endl;
-    // }
-
     current = source;
     path_weight[current] = 0;
     path[current].push_back(source);
@@ -84,7 +79,6 @@ int main() {
             }
         }
         current = index;
-        // cout << current << " ";
     }
 
     cout << endl << "Daftar jarak:" << endl;
@@ -96,14 +90,6 @@ int main() {
         }
         cout << ")" << endl;
     }
-
-    // cout << endl;
-    // for(int i = 0; i < vertices; i++) {
-    //     for(int j = 0; j < path[i].size(); j++) {
-    //         cout << path[i][j] << " ";
-    //     }
-    //     cout << endl;
-    // }
 
     return 0;
 }
