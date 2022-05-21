@@ -1,7 +1,7 @@
 1. Pilih salah satu vertex sebagai source
 2. Pilih semua vertex tetangga yang belum dikunjungi
 3. Jika  nilai di vertex tetangga lebih besar dari edge yang diuji saat ini, maka
-4. Update nilai vertex yang tetangga
+4. Update nilai vertex tetangga dan update path menuju ke vertex tetangga
 5. Tandai vertex saat ini sebagai vertex yang telah diuji
 6. Pilih vertex selanjutnya yang belum dikunjungi dengan bobot terkecil
 7. Ulangi langkah 2-6 sampai semua vertex telah diuji
