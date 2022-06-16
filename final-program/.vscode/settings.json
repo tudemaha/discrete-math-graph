@@ -1,0 +1,9 @@
+{
+    "files.associations": {
+        "*.tcc": "cpp",
+        "iosfwd": "cpp",
+        "ostream": "cpp"
+    },
+    "editor.fontSize": 15,
+    "editor.lineHeight": 1.4
+}
